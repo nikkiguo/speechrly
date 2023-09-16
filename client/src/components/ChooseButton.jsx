@@ -28,6 +28,7 @@ function ChooseButton({ featureName }) {
         padding: '0.3rem 1.85rem',
         border: 0,
         backgroundColor: bgColor,
+        transition: '.3s',
         '&:hover': { backgroundColor: '#f7e7b0', color: '#cfb559' },
       }}
       value='content'
