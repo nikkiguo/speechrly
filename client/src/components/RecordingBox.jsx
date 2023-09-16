@@ -111,6 +111,7 @@ function RecordingBox({ setIsRecording }) {
               borderRadius: '1rem',
               backgroundColor: buttonStatus === 1 ? '#F76C5E' : '#F4D35E',
               transition: '.2s',
+              boxShadow: '0px 4px 36px 21px rgba(0, 0, 0, 0.25)',
               '&:hover': {
                 transform: 'scale(1.05)',
                 backgroundColor: buttonStatus === 1 ? '#F76C5E' : '#F4D35E',

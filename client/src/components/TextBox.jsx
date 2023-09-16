@@ -6,9 +6,9 @@ function TextBox({ isRecording }) {
 
   const textChange = (event) => {
     if (event.target.value.slice(-1) == '\n') {
-      setText(event.target.value + '\n\t○   ');
+      setText(event.target.value + '\t○   ');
     } else if (event.target.value.length == 1) {
-      setText('\n\t○   ' + event.target.value);
+      setText('\t○   ' + event.target.value);
     } else {
       setText(event.target.value);
     }
@@ -21,6 +21,7 @@ function TextBox({ isRecording }) {
         flex: 1,
         color: isRecording ? '#726D6D' : '#B5B5B5',
         fontSize: '1.2rem',
+        lineHeight: '1.9rem',
       }}
       placeholder='Write each main point of your speech on a separate bullet point...'
       inputProps={{ 'aria-label': 'main points on separate lines' }}
