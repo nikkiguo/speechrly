@@ -1,11 +1,14 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import RecordingBox from '../components/RecordingBox';
+import TextBox from '../components/TextBox';
 
 function ProjectPage() {
   return (
     <Grid container flexGrow xs={12} height='100vh' bgcolor='#312F2F'>
-      <Grid item xs={6} padding='3rem'></Grid>
+      <Grid item xs={6} padding='3rem'>
+        <TextBox />
+      </Grid>
       <Grid
         item
         container
