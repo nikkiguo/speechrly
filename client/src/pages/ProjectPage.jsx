@@ -1,10 +1,11 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import RecordingBox from '../components/RecordingBox';
+import ChooseFeatures from '../components/ChooseFeatures';
 
 function ProjectPage() {
   return (
-    <Grid container flexGrow xs={12} height='100vh' bgcolor='#312F2F'>
+    <Grid container flexGrow xs={12} minHeight='100vh' bgcolor='#312F2F'>
       <Grid item xs={6} padding='3rem'></Grid>
       <Grid
         item
@@ -15,10 +16,14 @@ function ProjectPage() {
         justifyContent='center'
         alignContent='center'
       >
+
+          <ChooseFeatures/>
+
         <Grid
           item
           container
-          height='100%'
+          height='85%'
+          marginTop="1.5rem"
           borderRadius='1rem'
           justifyContent='center'
           alignContent='center'

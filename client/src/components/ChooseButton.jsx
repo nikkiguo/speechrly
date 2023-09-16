@@ -19,7 +19,7 @@ function ChooseButton({featureName}) {
   
   return (
     <ToggleButton 
-    sx={{ color: textColor, borderRadius: '100rem', margin: '1rem', fontFamily: 'sans-serif', textTransform: 'none', letterSpacing: "0.0625rem", margin: "0.35rem", padding: "0.3rem 1.25rem", border: 0, backgroundColor: bgColor, '&:hover': { backgroundColor: "#f7e7b0", color: "#cfb559"}}} value="content" aria-label="content" onClick={buttonClick}>
+    sx={{ fontSize: "1.5rem", color: textColor, borderRadius: '100rem', fontFamily: 'sans-serif', textTransform: 'none', letterSpacing: "0.0625rem", margin: "0.4rem", padding: "0.3rem 1.85rem", border: 0, backgroundColor: bgColor, '&:hover': { backgroundColor: "#f7e7b0", color: "#cfb559"}}} value="content" aria-label="content" onClick={buttonClick}>
       {featureName}
     </ToggleButton>
   )
