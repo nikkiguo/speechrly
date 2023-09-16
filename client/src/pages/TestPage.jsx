@@ -3,9 +3,7 @@ import ChooseFeatures from '../components/ChooseFeatures';
 
 function TestPage() {
   return (
-    <>
-      <ChooseFeatures></ChooseFeatures>
-    </>
+    <ChooseFeatures></ChooseFeatures>
   );
 }
 

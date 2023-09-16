@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import RecordingBox from '../components/RecordingBox';
+import ChooseFeatures from '../components/ChooseFeatures';
 import TextBox from '../components/TextBox';
 
 function ProjectPage() {
+  const [isRecording, setIsRecording] = useState(false);
+
   return (
-    <Grid container flexGrow xs={12} height='100vh' bgcolor='#312F2F'>
+    <Grid container flexGrow xs={12} minHeight='100vh' bgcolor='#312F2F'>
       <Grid item xs={6} padding='3rem'>
-        <TextBox />
+        <TextBox isRecording={isRecording} />
       </Grid>
       <Grid
         item
@@ -18,17 +21,21 @@ function ProjectPage() {
         justifyContent='center'
         alignContent='center'
       >
+        <ChooseFeatures />
+
         <Grid
           item
           container
-          width='100%'
-          height='100%'
+          height='85%'
+          marginTop='1.5rem'
           borderRadius='1rem'
           justifyContent='center'
           alignContent='center'
           backgroundColor='#272626'
         >
-          <RecordingBox />
+          <Grid item>
+            <RecordingBox setIsRecording={setIsRecording} />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

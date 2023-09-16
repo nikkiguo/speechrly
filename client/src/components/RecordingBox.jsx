@@ -11,7 +11,7 @@ import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import WbIncandescentRoundedIcon from '@mui/icons-material/WbIncandescentRounded';
 import { ReactMic } from 'react-mic';
 
-function RecordingBox() {
+function RecordingBox({ setIsRecording }) {
   const [record, setRecord] = useState(false);
   const [myAudioSrc, setMyAudioSrc] = useState(null);
   const [buttonStatus, setButtonStatus] = useState(0);
@@ -29,6 +29,7 @@ function RecordingBox() {
     if (buttonStatus === 0) {
       setRecord(true);
       setButtonStatus(1);
+      setIsRecording(true);
     } else if (buttonStatus === 1) {
       setRecord(false);
       setButtonStatus(2);
@@ -55,7 +56,6 @@ function RecordingBox() {
         justifyContent='center'
         alignItems='center'
         width='100%'
-        spacing={5}
       >
         <Box display={buttonStatus === 1 ? 'block' : 'none'}>
           <ReactMic
@@ -73,13 +73,13 @@ function RecordingBox() {
               color='#5A5A5A'
               fontSize='2rem'
               fontWeight={600}
-              margin={0}
+              marginBottom={2}
             >
               TRANSCRIPT
             </Typography>
             <Box
               width='75%'
-              maxHeight='15rem'
+              maxHeight='10rem'
               minHeigh
               sx={{
                 display: 'flex',
@@ -96,11 +96,12 @@ function RecordingBox() {
           display={buttonStatus === 2 ? 'flex' : 'none'}
           justifyContent='center'
           alignItems='center'
+          marginTop={5}
         >
           <audio controls id='myAudio' src={myAudioSrc}></audio>
         </Box>
 
-        <Box display='flex' justifyContent='center'>
+        <Box display='flex' marginTop={5} justifyContent='center'>
           <Button
             sx={{
               textTransform: 'none',
