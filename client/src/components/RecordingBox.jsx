@@ -34,12 +34,6 @@ function RecordingBox({ setIsRecording }) {
       setRecord(false);
       setButtonStatus(2);
       setIsLoading(true);
-      fetch('/toText')
-        .then((res) => res.json())
-        .then((data) => {
-          setIsLoading(false);
-          setText(data['text']);
-        });
     } else if (buttonStatus === 2) {
     }
   };
@@ -47,7 +41,28 @@ function RecordingBox({ setIsRecording }) {
   const onStop = (recordedBlob) => {
     const url = URL.createObjectURL(recordedBlob.blob);
     setMyAudioSrc(url);
+
+    sendAudio(recordedBlob.blob);
   };
+
+  async function sendAudio(blob) {
+    var data = new FormData();
+
+    data.set('file', blob, 'audioToSave.webm');
+
+    await fetch('/toText', {
+      method: 'POST',
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        setIsLoading(false);
+        setText(res);
+      })
+      .then((json) => {
+        console.log(json);
+      });
+  }
   return (
     <>
       {isLoading ? <CircularProgress /> : null}

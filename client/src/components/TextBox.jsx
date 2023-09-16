@@ -5,14 +5,28 @@ function TextBox({ isRecording }) {
   const [text, setText] = useState('');
 
   const textChange = (event) => {
-    if (event.target.value.slice(-1) == '\n') {
+    if (event.target.value.slice(-1) === '\n') {
       setText(event.target.value + '\t○   ');
-    } else if (event.target.value.length == 1) {
+    } else if (event.target.value.length === 1) {
       setText('\t○   ' + event.target.value);
     } else {
       setText(event.target.value);
     }
   };
+
+  // TODO: error for when they press record before writing in main points
+
+  if (isRecording) {
+    // fetch('/matchPointsToText', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ test }),
+    // })
+    //   .then((response) => response.json())
+    //   .catch((error) => console.log(error));
+  }
 
   return (
     <InputBase
