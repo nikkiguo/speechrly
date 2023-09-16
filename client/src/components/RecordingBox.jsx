@@ -4,7 +4,6 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import WbIncandescentRoundedIcon from '@mui/icons-material/WbIncandescentRounded';
 import { ReactMic } from 'react-mic';
-import OAudioPlayer from '@oovui/audio-player-react';
 
 function RecordingBox() {
   const [record, setRecord] = useState(false);
