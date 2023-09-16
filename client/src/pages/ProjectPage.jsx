@@ -18,6 +18,7 @@ function ProjectPage() {
         <Grid
           item
           container
+          width='100%'
           height='100%'
           borderRadius='1rem'
           justifyContent='center'
