@@ -1,36 +1,21 @@
-import React from 'react'
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import * as React from 'react';
+import ChooseButton from './ChooseButton';
+import { Box } from '@mui/material';
 
 function ChooseFeatures() {
+    
+    return (
+        <Box width="100%" display="flex" justifyContent="center" alignItems="center">
+            <Box bgcolor="#F4D35E" borderRadius="100rem" paddingX="1.4rem" paddingY="0.5rem">
+                <p style={{color: "#97823A", display: "inline", paddingRight: "1rem"}}>Evaluate:</p>
+                <ChooseButton featureName="Content" />
+                <ChooseButton featureName="Eye-Contact" />
+                <ChooseButton featureName="Voice" />
+            </Box>
+        </Box>
 
-    const [formats, setFormats] = React.useState(() => ['bold', 'italic']);
-
-  const handleFormat = (event, newFormats) => {
-    setFormats(newFormats);
-  };
-
-  return (
-    <ToggleButtonGroup
-      value={formats}
-      onChange={handleFormat}
-      aria-label="text formatting"
-    >
-      <ToggleButton value="bold" aria-label="bold">
-        <FormatBoldIcon />
-      </ToggleButton>
-      <ToggleButton value="italic" aria-label="italic">
-        <FormatItalicIcon />
-      </ToggleButton>
-      <ToggleButton value="underlined" aria-label="underlined">
-        <FormatUnderlinedIcon />
-      </ToggleButton>
-      <ToggleButton value="color" aria-label="color" disabled>
-        <FormatColorFillIcon />
-        <ArrowDropDownIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
-  );
+    );
 }
+
 
 export default ChooseFeatures

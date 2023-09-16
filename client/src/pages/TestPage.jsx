@@ -1,7 +1,12 @@
 import React from 'react';
+import ChooseFeatures from '../components/ChooseFeatures';
 
 function TestPage() {
-  return <div>TestPage</div>;
+  return (
+    <>
+      <ChooseFeatures></ChooseFeatures>
+    </>
+  );
 }
 
 export default TestPage;
