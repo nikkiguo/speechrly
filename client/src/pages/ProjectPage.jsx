@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import RecordingBox from '../components/RecordingBox';
 import ChooseFeatures from '../components/ChooseFeatures';

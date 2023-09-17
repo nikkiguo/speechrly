@@ -17,7 +17,7 @@ function RecordingBox({ setIsRecording }) {
   const [record, setRecord] = useState(false);
   const [myAudioSrc, setMyAudioSrc] = useState(null);
   const [buttonStatus, setButtonStatus] = useState(0);
-  const {buttonValues} = useContext(ContentContext);
+  const { buttonValues } = useContext(ContentContext);
   const [changeButts, setChangeButts] = buttonValues;
   const [text, setText] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,15 +34,25 @@ function RecordingBox({ setIsRecording }) {
       setRecord(true);
       setButtonStatus(1);
       setChangeButts(false);
-      
+      setIsRecording(true);
     } else if (buttonStatus === 1) {
       setRecord(false);
       setButtonStatus(2);
       setIsLoading(false);
     } else if (buttonStatus === 2) {
       setButtonStatus(3);
+      feedback();
     }
   };
+
+  async function feedback() {
+    await fetch('/feedback')
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  }
 
   const onStop = (recordedBlob) => {
     const url = URL.createObjectURL(recordedBlob.blob);
@@ -104,7 +114,6 @@ function RecordingBox({ setIsRecording }) {
             <Box
               width='75%'
               maxHeight='10rem'
-              minHeigh
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
