@@ -22,7 +22,7 @@ function TestPage() {
         alignContent='center'
       >
 
-        <ChooseFeatures page="feedback"/>
+        <ChooseFeatures/>
 
         <Grid
           item

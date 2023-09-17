@@ -11,6 +11,7 @@ import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import WbIncandescentRoundedIcon from '@mui/icons-material/WbIncandescentRounded';
 import { ReactMic } from 'react-mic';
 import ContentContext from '../contexts/ContentContext';
+import EvalStats from './EvalStats';
 
 function RecordingBox({ setIsRecording }) {
   const [record, setRecord] = useState(false);
@@ -37,9 +38,9 @@ function RecordingBox({ setIsRecording }) {
     } else if (buttonStatus === 1) {
       setRecord(false);
       setButtonStatus(2);
-      setChangeButts(true);
-      setIsLoading(true);
+      setIsLoading(false);
     } else if (buttonStatus === 2) {
+      setButtonStatus(3);
     }
   };
 
@@ -47,7 +48,7 @@ function RecordingBox({ setIsRecording }) {
     const url = URL.createObjectURL(recordedBlob.blob);
     setMyAudioSrc(url);
 
-    sendAudio(recordedBlob.blob);
+    // sendAudio(recordedBlob.blob);
   };
 
   async function sendAudio(blob) {
@@ -70,8 +71,11 @@ function RecordingBox({ setIsRecording }) {
   }
   return (
     <>
-      {isLoading ? <CircularProgress /> : null}
-      <Stack
+      {isLoading ? <CircularProgress style={{'color':'#F4D35E'}} /> : null}
+      {
+        buttonStatus === 3 ? <box style={{height:'85%'}} ><EvalStats /></box> :
+        (
+<Stack
         display={isLoading ? 'none' : 'flex'}
         justifyContent='center'
         alignItems='center'
@@ -151,6 +155,8 @@ function RecordingBox({ setIsRecording }) {
           </Button>
         </Box>
       </Stack>
+        )
+      }
     </>
   );
 }

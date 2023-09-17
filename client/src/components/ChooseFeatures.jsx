@@ -42,8 +42,8 @@ function ChooseFeatures() {
             alignItems='center'
           >
             <ChooseButton featureName='Content' />
-            <ChooseButton featureName='Eye-Contact' />
-            <ChooseButton featureName='Voice' />
+            <ChooseButton featureName='Eye-contact' />
+            <ChooseButton featureName='Gestures' />
           </Box>
         </Stack>
       </Box>
