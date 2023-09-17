@@ -4,9 +4,13 @@ import RecordingBox from '../components/RecordingBox';
 import ChooseFeatures from '../components/ChooseFeatures';
 import TextBox from '../components/TextBox';
 import ContentContext from '../contexts/ContentContext';
+import ContentFeedbackContext from '../contexts/ContentFeedbackContext';
 
 function ProjectPage() {
   const [contentUp, setContentUp] = useState(true);
+  const [contentFeedback, setContentFeedback] = useState(
+    "Excellent! You've covered all your points!"
+  );
   const [eyeUp, setEyeUp] = useState(true);
   const [gestureUp, setGestureUp] = useState(true);
   const [changeButts, setChangeButts] = useState(true);
@@ -21,36 +25,40 @@ function ProjectPage() {
         buttonValues: [changeButts, setChangeButts],
       }}
     >
-      <Grid container flexGrow xs={12} minHeight='100vh' bgcolor='#312F2F'>
-        <Grid item xs={6} padding='3rem'>
-          <TextBox isRecording={isRecording} />
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          container
-          paddingRight='3rem'
-          py='3rem'
-          justifycontent='center'
-          alignContent='center'
-        >
-          <ChooseFeatures />
+      <ContentFeedbackContext.Provider
+        value={[contentFeedback, setContentFeedback]}
+      >
+        <Grid container flexGrow xs={12} minHeight='100vh' bgcolor='#312F2F'>
+          <Grid item xs={6} padding='3rem'>
+            <TextBox isRecording={isRecording} />
+          </Grid>
           <Grid
             item
+            xs={6}
             container
-            height='85%'
-            marginTop='1.5rem'
-            borderRadius='1rem'
-            justifyContent='center'
+            paddingRight='3rem'
+            py='3rem'
+            justifycontent='center'
             alignContent='center'
-            backgroundColor='#272626'
           >
-            <Grid item>
-              <RecordingBox setIsRecording={setIsRecording} />
+            <ChooseFeatures />
+            <Grid
+              item
+              container
+              height='85%'
+              marginTop='1.5rem'
+              borderRadius='1rem'
+              justifyContent='center'
+              alignContent='center'
+              backgroundColor='#272626'
+            >
+              <Grid item>
+                <RecordingBox setIsRecording={setIsRecording} />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </ContentFeedbackContext.Provider>
     </ContentContext.Provider>
   );
 }

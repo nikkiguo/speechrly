@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Button,
   Typography,
-  Stack,
   Grid,
   Divider,
   linearProgressClasses,
@@ -41,13 +40,6 @@ function FeedBackText({ feedBackName, percentFeedBack, evalSolidInfo }) {
         style={{ width: '100%' }}
         onClick={evalButtonInfoClick}
       >
-        {/* <Stack 
-              width="100%"
-              direction="horizontal" 
-              justifycontent="space-between"
-              alignitems="center"
-              spacing={2}        
-              > */}
         <Grid container justifyContent='space-between' alignItems='center'>
           <Grid item>
             <Typography
@@ -69,7 +61,6 @@ function FeedBackText({ feedBackName, percentFeedBack, evalSolidInfo }) {
             ></StyledLinearProgress>
           </Grid>
         </Grid>
-        {/* </Stack> */}
       </Button>
       <Typography
         padding='0.35rem'

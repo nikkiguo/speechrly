@@ -57,8 +57,9 @@ def feedback():
   for i in accuratePoints:
     accuratePointsList.append(i["text"])
 
-  if len(accuratePointsList) != 0:
-  
+  if len(accuratePointsList) == 0:
+    return jsonify({'data': mainPoints})
+  else:
     highs = missingPoints(entireSpeech, accuratePointsList)
 
     for m in mainPoints:

@@ -3,6 +3,7 @@ import FeedBackText from '../components/FeedBackText';
 import ContentContext from '../contexts/ContentContext';
 import { Grid, Stack, Button } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import ContentFeedbackContext from '../contexts/ContentFeedbackContext';
 
 function EvalStats() {
   const { contentValues, eyeValues, gestureValues } =
@@ -10,6 +11,9 @@ function EvalStats() {
   const [contentUp, setContentUp] = contentValues;
   const [eyeUp, setEyeUp] = eyeValues;
   const [gestureUp, setGestureUp] = gestureValues;
+  const [contentFeedback, setContentFeedback] = useContext(
+    ContentFeedbackContext
+  );
 
   var cont;
   var eye;
@@ -17,15 +21,33 @@ function EvalStats() {
 
   const evalStats = () => {
     contentUp === true
-      ? (cont = <FeedBackText feedBackName='Content' percentFeedBack='50' evalSolidInfo='content info'/>)
+      ? (cont = (
+          <FeedBackText
+            feedBackName='Content'
+            percentFeedBack='50'
+            evalSolidInfo={contentFeedback}
+          />
+        ))
       : (cont = '');
 
     eyeUp === true
-      ? (eye = <FeedBackText feedBackName='Eye-contact' percentFeedBack='69' evalSolidInfo='eye info'/>)
+      ? (eye = (
+          <FeedBackText
+            feedBackName='Eye-contact'
+            percentFeedBack='69'
+            evalSolidInfo='eye info'
+          />
+        ))
       : (eye = '');
 
     gestureUp === true
-      ? (vc = <FeedBackText feedBackName='Gestures' percentFeedBack='84' evalSolidInfo='gestures info'/>)
+      ? (vc = (
+          <FeedBackText
+            feedBackName='Gestures'
+            percentFeedBack='84'
+            evalSolidInfo='gestures info'
+          />
+        ))
       : (vc = '');
   };
 

@@ -12,6 +12,7 @@ import WbIncandescentRoundedIcon from '@mui/icons-material/WbIncandescentRounded
 import { ReactMic } from 'react-mic';
 import ContentContext from '../contexts/ContentContext';
 import EvalStats from './EvalStats';
+import ContentFeedbackContext from '../contexts/ContentFeedbackContext';
 
 function RecordingBox({ setIsRecording }) {
   const [record, setRecord] = useState(false);
@@ -21,6 +22,9 @@ function RecordingBox({ setIsRecording }) {
   const [changeButts, setChangeButts] = buttonValues;
   const [text, setText] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [contentFeedback, setContentFeedback] = useContext(
+    ContentFeedbackContext
+  );
 
   const texts = ['Start recording', 'Stop recording', 'Evaluate'];
   const icons = [
@@ -48,8 +52,20 @@ function RecordingBox({ setIsRecording }) {
   async function feedback() {
     await fetch('/feedback')
       .then((response) => response.json())
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
+        if (res.data.length !== 0) {
+          let message = "You've forgotten the following points: ";
+          for (let i = 0; i < res.data.length; i++) {
+            if (i === 0) {
+              message += res.data[i];
+            } else {
+              message += '; ' + res.data[i];
+            }
+          }
+          console.log('Message: ' + message);
+          setContentFeedback(message);
+        }
       })
       .catch((error) => console.log(error));
   }
