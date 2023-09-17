@@ -2,6 +2,9 @@ import cv2
 from gaze_tracking import GazeTracking
 from gesture_tracking import GestureTracking
 
+import numpy as np 
+from matplotlib import pyplot as plt 
+
 gaze = GazeTracking()
 gesture = GestureTracking()
 webcam = cv2.VideoCapture(0)
@@ -83,73 +86,92 @@ while True:
 # Use ratio of frames to total gesture count to evaluate expressiveness.
 total_gestures = sum(gesture_tally.values())
 
+
 #Output advice for eyes
 def outputEyeAdvice(leftCounter, rightCounter, centerCounter):
-    eyeCounterList = [leftCounter, rightCounter, centerCounter]
+  eyeCounterList = [leftCounter, rightCounter, centerCounter]
+  eyep = 0
+  advice = ""
 
-    leftRepeat = eyeCounterList.count(eyeCounterList[0])
-    rightRepeat = eyeCounterList.count(eyeCounterList[1])
+  leftRepeat = eyeCounterList.count(eyeCounterList[0])
+  rightRepeat = eyeCounterList.count(eyeCounterList[1])
 
-    #Case when user looks equally in all directions (all 3 counters are equal)
-    if (leftRepeat == 3):
-        advice = "Fantastic! You maintained great eye contact in all directions!"
-    
-    #Case when user looks in two directions more than the third
-    if (leftRepeat == 2):
-        if (rightCounter == leftCounter):
-            advice = "Fair. You mainly looked left and right, remember to look at the center more often."
-        else:
-            advice = "Fair. You mainly looked left and center, remember to look right more often."
-    elif (rightRepeat == 2):
-        advice = "Fair. You mainly looked right and center, remember to look left more often."
-
-    #Case when user looks in one direction more than the other two
-    if (leftCounter == max(eyeCounterList)):
-        advice = "Keep practicing! You mainly looked left. You should look right and center more often."
-    elif (rightCounter == max(eyeCounterList)):
-        advice = "Keep practicing! You mainly looked right. You should look left and center more often."
+  #Case when user looks equally in all directions (all 3 counters are equal)
+  if (leftRepeat == 3):
+    if (leftCounter == 0):
+      advice = "Please try again."
+      eyep = 0
     else:
-        advice = "Keep practicing! You mainly looked at the center. You should look left and right more often."
+      advice = "Fantastic! You maintained great eye contact in all directions!"
+      eyep = 1
 
-    return advice
+  #Case when user looks in two directions more than the third
+  elif (leftRepeat == 2):
+    if (rightCounter == leftCounter) and (rightCounter > centerCounter):
+      advice = "Fair. You mainly looked left and right, remember to look at the center more often."
+      eyep = 0.6
+    elif (rightCounter == leftCounter) and (rightCounter < centerCounter):
+      advice = "Keep practicing! You mainly looked at the center. You should look left and right more often."
+      eyep = 0.3
+
+    elif (leftCounter == centerCounter) and (rightCounter < centerCounter):
+      advice = "Fair. You mainly looked left and center, remember to look right more often."
+      eyep = 0.6
+    elif (leftCounter == centerCounter) and (rightCounter > centerCounter):
+      advice = "Keep practicing! You mainly looked right. You should look left and center more often."
+      eyep = 0.3
+
+    elif (rightRepeat == 2) and (rightCounter > leftCounter):
+      advice = "Fair. You mainly looked right and center, remember to look left more often."
+      eyep = 0.6
+    elif (rightRepeat == 2) and (rightCounter < leftCounter):
+      advice = "Keep practicing! You mainly looked left. You should look right and center more often."
+      eyep = 0.3
+
+  #Case when user looks in one direction more than the other two
+  elif (leftCounter == max(eyeCounterList)):
+    advice = "Keep practicing! You mainly looked left. You should look right and center more often."
+    eyep = 0.3
+  elif (rightCounter == max(eyeCounterList)):
+    advice = "Keep practicing! You mainly looked right. You should look left and center more often."
+    eyep = 0.3
+  else:
+    advice = "Keep practicing! You mainly looked at the center. You should look left and right more often."
+    eyep = 0.3
+
+  return [advice, eyep]
+
 
 #Output advice for gestures
 def ouputGestureAdvice(numFrames, numGestures):
-    frameToGestureRatio = numFrames//numGestures
-    if (frameToGestureRatio > 100):
-        advice = "Your hand movements were too erratic. Focus on moving your hands at a more stable pace to avoid distracting the audience with excessive hand gestures."
-    elif (frameToGestureRatio < 80): 
-        advice = "You are too stiff. Take a deep breath in, a deep breath out, and wiggle your arms around! Now practice keeping your hands and arms away from your sides, bring them up towards your chest and use open-palm hand gestures while talking."
-    else:
-        advice = "Fantastic! Your hand gestures are stable and welcoming, helping the audience feel more engaged while you talk."
+  advice = ""
+  gesturep = 0
 
-    return advice
+  if numGestures == 0:
+    advice = "Please try again."
+    return [advice, gesturep]
 
-#Percentage for the sliding bar
-def outputEyePercentage(leftCounter, rightCounter, centerCounter):
-    if(leftCounter == rightCounter == centerCounter):
-        if(leftCounter == 0):
-            return 0
-        else:
-            return 1
-    elif(leftCounter == rightCounter) or (rightCounter == centerCounter) or (leftCounter == centerCounter):
-        return 0.6
-    else:
-        return 0.3
+  frameToGestureRatio = numFrames // numGestures
 
-#Percentage for the sliding bar
-def outputHandPercentage(numFrames, numGestures):
-    ratio = numFrames//numGestures
-    if (ratio < 95) and (ratio > 85):
-        return 1
-    elif (ratio < 100) and (ratio > 80):
-        return 0.6
-    elif (ratio < 120) and (ratio > 60):
-        return 0.3
-    elif ratio == 0:
-        return 0
-    else:
-        return 0.1
+  if (frameToGestureRatio == 0):
+    advice = "Please try again."
+    gesturep = 0
+  elif (frameToGestureRatio > 100):
+    advice = "Your hand movements were too erratic. Focus on moving your hands at a more stable pace to avoid distracting the audience with excessive hand gestures."
+    gesturep = 0.5
+  elif (frameToGestureRatio < 1):
+    advice = "You are too stiff. Take a deep breath in, a deep breath out, and wiggle your arms around! Now practice keeping your hands and arms away from your sides, bring them up towards your chest and use open-palm hand gestures while talking."
+    gesturep = 0.5
+  else:
+    advice = "Fantastic! Your hand gestures are stable and welcoming, helping the audience feel more engaged while you talk."
+    gesturep = 1
+
+  return [advice, gesturep]
+
+print("\n========== Eye Contact Advice ==========")
+print(outputEyeAdvice(gaze_tally["Left"], gaze_tally["Right"], gaze_tally["Center"])[0])
+print("\n========== Gesture Advice ==========")
+print(ouputGestureAdvice(frameCount, total_gestures)[0])
 
 webcam.release()
 # cap.release()
