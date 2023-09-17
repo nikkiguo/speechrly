@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Typography,
   Button,
@@ -10,11 +10,14 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import WbIncandescentRoundedIcon from '@mui/icons-material/WbIncandescentRounded';
 import { ReactMic } from 'react-mic';
+import ContentContext from '../contexts/ContentContext';
 
 function RecordingBox({ setIsRecording }) {
   const [record, setRecord] = useState(false);
   const [myAudioSrc, setMyAudioSrc] = useState(null);
   const [buttonStatus, setButtonStatus] = useState(0);
+  const {buttonValues} = useContext(ContentContext);
+  const [changeButts, setChangeButts] = buttonValues;
   const [text, setText] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,10 +32,12 @@ function RecordingBox({ setIsRecording }) {
     if (buttonStatus === 0) {
       setRecord(true);
       setButtonStatus(1);
-      setIsRecording(true);
+      setChangeButts(false);
+      
     } else if (buttonStatus === 1) {
       setRecord(false);
       setButtonStatus(2);
+      setChangeButts(true);
       setIsLoading(true);
     } else if (buttonStatus === 2) {
       feedback();
