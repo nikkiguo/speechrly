@@ -17,15 +17,23 @@ function TextBox({ isRecording }) {
   // TODO: error for when they press record before writing in main points
 
   if (isRecording) {
-    // fetch('/matchPointsToText', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ test }),
-    // })
-    //   .then((response) => response.json())
-    //   .catch((error) => console.log(error));
+    // console.log({ text });
+    sendPoints();
+  }
+
+  async function sendPoints() {
+    await fetch('/matchPointsToText', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text: text,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   }
 
   return (

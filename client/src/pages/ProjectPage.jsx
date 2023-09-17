@@ -8,7 +8,7 @@ function ProjectPage() {
   const [isRecording, setIsRecording] = useState(false);
 
   return (
-    <Grid container flexGrow xs={12} minHeight='100vh' bgcolor='#312F2F'>
+    <Grid container flexGrow minHeight='100vh' bgcolor='#312F2F'>
       <Grid item xs={6} padding='3rem'>
         <TextBox isRecording={isRecording} />
       </Grid>

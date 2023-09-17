@@ -35,8 +35,18 @@ function RecordingBox({ setIsRecording }) {
       setButtonStatus(2);
       setIsLoading(true);
     } else if (buttonStatus === 2) {
+      feedback();
     }
   };
+
+  async function feedback() {
+    await fetch('/feedback')
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  }
 
   const onStop = (recordedBlob) => {
     const url = URL.createObjectURL(recordedBlob.blob);
@@ -95,7 +105,6 @@ function RecordingBox({ setIsRecording }) {
             <Box
               width='75%'
               maxHeight='10rem'
-              minHeigh
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
