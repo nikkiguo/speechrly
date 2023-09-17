@@ -16,7 +16,7 @@ function RecordingBox({ setIsRecording }) {
   const [record, setRecord] = useState(false);
   const [myAudioSrc, setMyAudioSrc] = useState(null);
   const [buttonStatus, setButtonStatus] = useState(0);
-  const {buttonValues} = useContext(ContentContext);
+  const { buttonValues } = useContext(ContentContext);
   const [changeButts, setChangeButts] = buttonValues;
   const [text, setText] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +33,7 @@ function RecordingBox({ setIsRecording }) {
       setRecord(true);
       setButtonStatus(1);
       setChangeButts(false);
-      
+      setIsRecording(true);
     } else if (buttonStatus === 1) {
       setRecord(false);
       setButtonStatus(2);
