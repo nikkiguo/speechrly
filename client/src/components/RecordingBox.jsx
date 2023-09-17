@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Box, Stack } from '@mui/material';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import WbIncandescentRoundedIcon from '@mui/icons-material/WbIncandescentRounded';
 import { ReactMic } from 'react-mic';
+import ContentContext from '../contexts/ContentContext';
 
 function RecordingBox() {
   const [record, setRecord] = useState(false);
   const [myAudioSrc, setMyAudioSrc] = useState(null);
   const [buttonStatus, setButtonStatus] = useState(0);
+  const {buttonValues} = useContext(ContentContext);
+  const [changeButts, setChangeButts] = buttonValues;
 
   const texts = ['Start recording', 'Stop recording', 'Evaluate'];
   const icons = [
@@ -21,9 +24,12 @@ function RecordingBox() {
     if (buttonStatus === 0) {
       setRecord(true);
       setButtonStatus(1);
+      setChangeButts(false);
+      
     } else if (buttonStatus === 1) {
       setRecord(false);
       setButtonStatus(2);
+      setChangeButts(true);
     } else if (buttonStatus === 2) {
     }
   };
@@ -33,7 +39,7 @@ function RecordingBox() {
     setMyAudioSrc(url);
   };
   return (
-    <Stack justifyContent='center' alignItems='center' width='100%' spacing={5}>
+    <Stack justifycontent='center' alignItems='center' width='100%' spacing={5}>
       <Box display={buttonStatus === 1 ? 'block' : 'none'}>
         <ReactMic
           record={record}
@@ -47,20 +53,20 @@ function RecordingBox() {
 
       <Box
         display={buttonStatus === 2 ? 'flex' : 'none'}
-        justifyContent='center'
-        alignItems='center'
+        justifycontent='center'
+        alignitems='center'
       >
         <audio controls id='myAudio' src={myAudioSrc}></audio>
       </Box>
 
-      <Box display='flex' justifyContent='center'>
+      <Box display='flex' justifycontent='center'>
         <Button
           sx={{
             textTransform: 'none',
             padding: '1rem 2rem',
             fontSize: '1.5rem',
             color: '#010101',
-            borderRadius: '1rem',
+            borderradius: '1rem',
             backgroundColor: buttonStatus === 1 ? '#F76C5E' : '#F4D35E',
             transition: '.2s',
             '&:hover': {
@@ -70,10 +76,10 @@ function RecordingBox() {
           }}
           onClick={buttonClick}
           variant='contained'
-          justifyContent='center'
-          alignItems='center'
+          justifycontent='center'
+          alignitems='center'
           startIcon={
-            <Box display='flex' justifyContent='center' alignItems='center'>
+            <Box display='flex' justifycontent='center' alignItems='center'>
               {icons[buttonStatus]}
             </Box>
           }
