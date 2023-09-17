@@ -23,12 +23,12 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-function FeedBackText({ feedBackName, percentFeedBack }) {
+function FeedBackText({ feedBackName, percentFeedBack, evalSolidInfo }) {
   const [evalInfo, setEvalInfo] = useState('');
 
   const evalButtonInfoClick = () => {
     if (evalInfo === '') {
-      setEvalInfo('#FFF8E1');
+      setEvalInfo(evalSolidInfo);
     } else {
       setEvalInfo('');
     }

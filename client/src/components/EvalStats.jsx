@@ -17,15 +17,15 @@ function EvalStats() {
 
   const evalStats = () => {
     contentUp === true
-      ? (cont = <FeedBackText feedBackName='Content' percentFeedBack='50' />)
+      ? (cont = <FeedBackText feedBackName='Content' percentFeedBack='50' evalSolidInfo='content info'/>)
       : (cont = '');
 
     eyeUp === true
-      ? (eye = <FeedBackText feedBackName='Eye-contact' percentFeedBack='69' />)
+      ? (eye = <FeedBackText feedBackName='Eye-contact' percentFeedBack='69' evalSolidInfo='eye info'/>)
       : (eye = '');
 
     gestureUp === true
-      ? (vc = <FeedBackText feedBackName='Gestures' percentFeedBack='84' />)
+      ? (vc = <FeedBackText feedBackName='Gestures' percentFeedBack='84' evalSolidInfo='gestures info'/>)
       : (vc = '');
   };
 
