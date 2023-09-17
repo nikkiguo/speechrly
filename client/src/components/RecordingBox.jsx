@@ -38,7 +38,7 @@ function RecordingBox({ setIsRecording }) {
     } else if (buttonStatus === 1) {
       setRecord(false);
       setButtonStatus(2);
-      setIsLoading(false);
+      setIsLoading(true);
     } else if (buttonStatus === 2) {
       setButtonStatus(3);
       feedback();
@@ -58,7 +58,7 @@ function RecordingBox({ setIsRecording }) {
     const url = URL.createObjectURL(recordedBlob.blob);
     setMyAudioSrc(url);
 
-    // sendAudio(recordedBlob.blob);
+    sendAudio(recordedBlob.blob);
   };
 
   async function sendAudio(blob) {
@@ -81,91 +81,92 @@ function RecordingBox({ setIsRecording }) {
   }
   return (
     <>
-      {isLoading ? <CircularProgress style={{'color':'#F4D35E'}} /> : null}
-      {
-        buttonStatus === 3 ? <box style={{height:'85%'}} ><EvalStats /></box> :
-        (
-<Stack
-        display={isLoading ? 'none' : 'flex'}
-        justifyContent='center'
-        alignItems='center'
-        width='100%'
-      >
-        <Box display={buttonStatus === 1 ? 'block' : 'none'}>
-          <ReactMic
-            record={record}
-            className='sound-wave'
-            onStop={onStop}
-            mimeType='audio/webm'
-            strokeColor='#F76C5E'
-            backgroundColor='#272626'
-          />
-        </Box>
-        {text ? (
-          <>
-            <Typography
-              color='#5A5A5A'
-              fontSize='2rem'
-              fontWeight={600}
-              marginBottom={2}
-            >
-              TRANSCRIPT
-            </Typography>
-            <Box
-              width='75%'
-              maxHeight='10rem'
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-                overflowY: 'scroll',
-              }}
-            >
-              <Typography color='#B5B5B5'>{text}</Typography>
-            </Box>
-          </>
-        ) : null}
-        <Box
-          display={buttonStatus === 2 ? 'flex' : 'none'}
+      {isLoading ? <CircularProgress style={{ color: '#F4D35E' }} /> : null}
+      {buttonStatus === 3 ? (
+        <box style={{ height: '85%' }}>
+          <EvalStats />
+        </box>
+      ) : (
+        <Stack
+          display={isLoading ? 'none' : 'flex'}
           justifyContent='center'
           alignItems='center'
-          marginTop={5}
+          width='100%'
         >
-          <audio controls id='myAudio' src={myAudioSrc}></audio>
-        </Box>
-
-        <Box display='flex' marginTop={5} justifyContent='center'>
-          <Button
-            sx={{
-              textTransform: 'none',
-              padding: '1rem 2rem',
-              fontSize: '1.5rem',
-              color: '#010101',
-              borderRadius: '1rem',
-              backgroundColor: buttonStatus === 1 ? '#F76C5E' : '#F4D35E',
-              transition: '.2s',
-              boxShadow: '0px 4px 36px 21px rgba(0, 0, 0, 0.25)',
-              '&:hover': {
-                transform: 'scale(1.05)',
-                backgroundColor: buttonStatus === 1 ? '#F76C5E' : '#F4D35E',
-              },
-            }}
-            onClick={buttonClick}
-            variant='contained'
+          <Box display={buttonStatus === 1 ? 'block' : 'none'}>
+            <ReactMic
+              record={record}
+              className='sound-wave'
+              onStop={onStop}
+              mimeType='audio/webm'
+              strokeColor='#F76C5E'
+              backgroundColor='#272626'
+            />
+          </Box>
+          {text ? (
+            <>
+              <Typography
+                color='#5A5A5A'
+                fontSize='2rem'
+                fontWeight={600}
+                marginBottom={2}
+              >
+                TRANSCRIPT
+              </Typography>
+              <Box
+                width='75%'
+                maxHeight='10rem'
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflow: 'hidden',
+                  overflowY: 'scroll',
+                }}
+              >
+                <Typography color='#B5B5B5'>{text}</Typography>
+              </Box>
+            </>
+          ) : null}
+          <Box
+            display={buttonStatus === 2 ? 'flex' : 'none'}
             justifyContent='center'
             alignItems='center'
-            startIcon={
-              <Box display='flex' justifyContent='center' alignItems='center'>
-                {icons[buttonStatus]}
-              </Box>
-            }
+            marginTop={5}
           >
-            {texts[buttonStatus]}
-          </Button>
-        </Box>
-      </Stack>
-        )
-      }
+            <audio controls id='myAudio' src={myAudioSrc}></audio>
+          </Box>
+
+          <Box display='flex' marginTop={5} justifyContent='center'>
+            <Button
+              sx={{
+                textTransform: 'none',
+                padding: '1rem 2rem',
+                fontSize: '1.5rem',
+                color: '#010101',
+                borderRadius: '1rem',
+                backgroundColor: buttonStatus === 1 ? '#F76C5E' : '#F4D35E',
+                transition: '.2s',
+                boxShadow: '0px 4px 36px 21px rgba(0, 0, 0, 0.25)',
+                '&:hover': {
+                  transform: 'scale(1.05)',
+                  backgroundColor: buttonStatus === 1 ? '#F76C5E' : '#F4D35E',
+                },
+              }}
+              onClick={buttonClick}
+              variant='contained'
+              justifyContent='center'
+              alignItems='center'
+              startIcon={
+                <Box display='flex' justifyContent='center' alignItems='center'>
+                  {icons[buttonStatus]}
+                </Box>
+              }
+            >
+              {texts[buttonStatus]}
+            </Button>
+          </Box>
+        </Stack>
+      )}
     </>
   );
 }

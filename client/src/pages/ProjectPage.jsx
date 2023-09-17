@@ -13,7 +13,14 @@ function ProjectPage() {
   const [isRecording, setIsRecording] = useState(false);
 
   return (
-    <ContentContext.Provider value={{ contentValues: [contentUp, setContentUp], eyeValues: [eyeUp, setEyeUp], gestureValues: [gestureUp, setGestureUp], buttonValues: [changeButts, setChangeButts]}}>
+    <ContentContext.Provider
+      value={{
+        contentValues: [contentUp, setContentUp],
+        eyeValues: [eyeUp, setEyeUp],
+        gestureValues: [gestureUp, setGestureUp],
+        buttonValues: [changeButts, setChangeButts],
+      }}
+    >
       <Grid container flexGrow xs={12} minHeight='100vh' bgcolor='#312F2F'>
         <Grid item xs={6} padding='3rem'>
           <TextBox isRecording={isRecording} />
@@ -28,7 +35,6 @@ function ProjectPage() {
           alignContent='center'
         >
           <ChooseFeatures />
-
           <Grid
             item
             container
