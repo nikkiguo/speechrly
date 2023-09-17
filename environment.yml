@@ -7,3 +7,4 @@ dependencies:
   - numpy == 1.16.1
   - opencv == 3.4.*
   - dlib == 19.17.*
+  - mediapipe == 0.10.5
