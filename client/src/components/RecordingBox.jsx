@@ -19,12 +19,10 @@ function RecordingBox({ setIsRecording }) {
   const [myAudioSrc, setMyAudioSrc] = useState(null);
   const [buttonStatus, setButtonStatus] = useState(0);
   const { buttonValues } = useContext(ContentContext);
-  const [changeButts, setChangeButts] = buttonValues;
+  const [, setChangeButts] = buttonValues;
   const [text, setText] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [contentFeedback, setContentFeedback] = useContext(
-    ContentFeedbackContext
-  );
+  const [, setContentFeedback] = useContext(ContentFeedbackContext);
 
   const texts = ['Start recording', 'Stop recording', 'Evaluate'];
   const icons = [
@@ -96,12 +94,10 @@ function RecordingBox({ setIsRecording }) {
       });
   }
   return (
-    <>
+    <Box>
       {isLoading ? <CircularProgress style={{ color: '#F4D35E' }} /> : null}
       {buttonStatus === 3 ? (
-        <box style={{ height: '85%' }}>
-          <EvalStats />
-        </box>
+        <EvalStats />
       ) : (
         <Stack
           display={isLoading ? 'none' : 'flex'}
@@ -183,7 +179,7 @@ function RecordingBox({ setIsRecording }) {
           </Box>
         </Stack>
       )}
-    </>
+    </Box>
   );
 }
 

@@ -3,56 +3,55 @@ import { ToggleButton } from '@mui/material';
 
 import ContentContext from '../contexts/ContentContext';
 
-function ChooseButton({featureName}) {
+function ChooseButton({ featureName }) {
+  const { contentValues, eyeValues, gestureValues, buttonValues } =
+    useContext(ContentContext);
+  const [, setContentUp] = contentValues;
+  const [, setEyeUp] = eyeValues;
+  const [, setGestureUp] = gestureValues;
+  const [changeButts] = buttonValues;
 
-  const {contentValues, eyeValues, gestureValues, buttonValues} = useContext(ContentContext);
-  const [contentUp, setContentUp] = contentValues;
-  const [eyeUp, setEyeUp] = eyeValues;
-  const [gestureUp, setGestureUp] = gestureValues;
-  const [changeButts, setChangeButts] = buttonValues;
+  console.log(contentValues[0]);
 
-  console.log(contentValues[0])
-
-  const [bgColor, setBgColor] = useState("#FFF8E1");
-  const [textColor, setTextColor] = useState("#C2A84B");
+  const [bgColor, setBgColor] = useState('#FFF8E1');
+  const [textColor, setTextColor] = useState('#C2A84B');
   const [hoverBgColor, setHoverBgColor] = useState(bgColor);
   const [hoverTextColor, setHoverTextColor] = useState(textColor);
 
   const buttonClick = () => {
     if (changeButts === true) {
-      setHoverBgColor("#f7e7b0")
-      setTextColor("#cfb559")
+      setHoverBgColor('#f7e7b0');
+      setTextColor('#cfb559');
       if (bgColor === '#D7BA56') {
         setBgColor('#FFF8E1');
         setTextColor('#C2A84B');
-        if (featureName ===  "Content") {
-          setContentUp(true)
-        } else if (featureName ===  "Eye-contact") {
-          setEyeUp(true)
+        if (featureName === 'Content') {
+          setContentUp(true);
+        } else if (featureName === 'Eye-contact') {
+          setEyeUp(true);
         } else {
-          setGestureUp(true)
+          setGestureUp(true);
         }
-      } 
-      else {
+      } else {
         setBgColor('#D7BA56');
         setTextColor('#FFECA9');
-        if (featureName ===  "Content") {
-          setContentUp(false)
-        } else if (featureName === "Eye-contact") {
-          setEyeUp(false)
+        if (featureName === 'Content') {
+          setContentUp(false);
+        } else if (featureName === 'Eye-contact') {
+          setEyeUp(false);
         } else {
-          setGestureUp(false)
+          setGestureUp(false);
         }
       }
-    } 
-    else {
+    } else {
       setHoverBgColor(bgColor);
       setHoverTextColor(textColor);
     }
   };
 
   return (
-    <ToggleButton className=''
+    <ToggleButton
+      className=''
       sx={{
         fontSize: '1.2rem',
         color: textColor,

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { InputBase } from '@mui/material';
+import React, { useState } from "react";
+import { InputBase } from "@mui/material";
 
 function TextBox({ isRecording }) {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   const textChange = (event) => {
-    if (event.target.value.slice(-1) === '\n') {
-      setText(event.target.value + '\t○   ');
+    if (event.target.value.slice(-1) === "\n") {
+      setText(event.target.value + "\t○   ");
     } else if (event.target.value.length === 1) {
-      setText('\t○   ' + event.target.value);
+      setText("\t○   " + event.target.value);
     } else {
       setText(event.target.value);
     }
@@ -22,10 +22,10 @@ function TextBox({ isRecording }) {
   }
 
   async function sendPoints() {
-    await fetch('/matchPointsToText', {
-      method: 'POST',
+    await fetch("/matchPointsToText", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         text: text,
@@ -41,12 +41,12 @@ function TextBox({ isRecording }) {
       sx={{
         ml: 1,
         flex: 1,
-        color: isRecording ? '#726D6D' : '#B5B5B5',
-        fontSize: '1.2rem',
-        lineHeight: '1.9rem',
+        color: isRecording ? "#726D6D" : "#B5B5B5",
+        fontSize: "1.2rem",
+        lineHeight: "1.9rem",
       }}
       placeholder='Write each main point of your speech on a separate bullet point...'
-      inputProps={{ 'aria-label': 'main points on separate lines' }}
+      inputProps={{ "aria-label": "main points on separate lines" }}
       multiline
       autoFocus
       maxRows={24}
