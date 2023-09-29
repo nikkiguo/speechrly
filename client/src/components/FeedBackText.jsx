@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Button,
+  Box,
   Typography,
   Grid,
   Divider,
@@ -34,23 +35,29 @@ function FeedBackText({ feedBackName, percentFeedBack, evalSolidInfo }) {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        marginX: '8rem',
+      }}
+    >
       <Button
-        sx={{ borderradius: '100rem' }}
-        style={{ width: '100%' }}
+        sx={{ paddingY: '1.5rem', paddingX: '0rem' }}
         onClick={evalButtonInfoClick}
       >
         <Grid container justifyContent='space-between' alignItems='center'>
           <Grid item>
             <Typography
-              padding='0.32rem'
               color='#F4D35E'
               fontFamily='sans-serif'
               fontSize='1.8rem'
-              sx={{ letterSpacing: '0.0625rem', textTransform: 'none' }}
+              sx={{
+                letterSpacing: '0.0625rem',
+                textTransform: 'none',
+              }}
             >
-              {' '}
-              {feedBackName}{' '}
+              {feedBackName}
             </Typography>
           </Grid>
           <Grid item>
@@ -62,16 +69,17 @@ function FeedBackText({ feedBackName, percentFeedBack, evalSolidInfo }) {
           </Grid>
         </Grid>
       </Button>
-      <Typography
-        padding='0.35rem'
-        color='#B6AFAF'
-        fontFamily='sans-serif'
-        fontSize='1.2rem'
-        sx={{ letterSpacing: '0.0625rem', textTransform: 'none' }}
-      >
-        {' '}
-        {evalInfo}{' '}
-      </Typography>
+      {evalInfo ? (
+        <Typography
+          color='#B6AFAF'
+          fontFamily='sans-serif'
+          fontSize='1.2rem'
+          paddingBottom='1.5rem'
+          sx={{ letterSpacing: '0.0625rem', textTransform: 'none' }}
+        >
+          {evalInfo}
+        </Typography>
+      ) : null}
       <Divider
         sx={{
           backgroundColor: '#605C5C',
@@ -79,7 +87,7 @@ function FeedBackText({ feedBackName, percentFeedBack, evalSolidInfo }) {
           borderBottomWidth: '0.0625rem',
         }}
       ></Divider>
-    </>
+    </Box>
   );
 }
 

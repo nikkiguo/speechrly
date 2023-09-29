@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Grid } from '@mui/material';
-import RecordingBox from '../components/RecordingBox';
-import ChooseFeatures from '../components/ChooseFeatures';
-import TextBox from '../components/TextBox';
-import ContentContext from '../contexts/ContentContext';
-import ContentFeedbackContext from '../contexts/ContentFeedbackContext';
+import React, { useState } from "react";
+import { Grid } from "@mui/material";
+import RecordingBox from "../components/RecordingBox";
+import ChooseFeatures from "../components/ChooseFeatures";
+import TextBox from "../components/TextBox";
+import ContentContext from "../contexts/ContentContext";
+import ContentFeedbackContext from "../contexts/ContentFeedbackContext";
 
 function ProjectPage() {
   const [contentUp, setContentUp] = useState(true);
@@ -29,15 +29,15 @@ function ProjectPage() {
         value={[contentFeedback, setContentFeedback]}
       >
         <Grid container flexGrow xs={12} minHeight='100vh' bgcolor='#312F2F'>
-          <Grid item xs={6} padding='3rem'>
+          <Grid item xs={6} padding='5rem'>
             <TextBox isRecording={isRecording} />
           </Grid>
           <Grid
             item
             xs={6}
             container
-            paddingRight='3rem'
-            py='3rem'
+            paddingRight='5rem'
+            py='5rem'
             justifycontent='center'
             alignContent='center'
           >

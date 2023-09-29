@@ -1,19 +1,17 @@
 import React, { useContext } from 'react';
 import FeedBackText from '../components/FeedBackText';
 import ContentContext from '../contexts/ContentContext';
-import { Grid, Stack, Button } from '@mui/material';
+import { Stack, Button } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ContentFeedbackContext from '../contexts/ContentFeedbackContext';
 
 function EvalStats() {
   const { contentValues, eyeValues, gestureValues } =
     useContext(ContentContext);
-  const [contentUp, setContentUp] = contentValues;
-  const [eyeUp, setEyeUp] = eyeValues;
-  const [gestureUp, setGestureUp] = gestureValues;
-  const [contentFeedback, setContentFeedback] = useContext(
-    ContentFeedbackContext
-  );
+  const [contentUp] = contentValues;
+  const [eyeUp] = eyeValues;
+  const [gestureUp] = gestureValues;
+  const [contentFeedback] = useContext(ContentFeedbackContext);
 
   var cont;
   var eye;
@@ -53,18 +51,10 @@ function EvalStats() {
 
   evalStats();
   return (
-    <Stack
-      marginY='2rem'
-      height='20rem'
-      direction='column'
-      justifyContent='space-between'
-      spacing={2}
-    >
-      <Grid item>
-        {cont}
-        {eye}
-        {vc}
-      </Grid>
+    <Stack direction='column' justifyContent='space-between'>
+      {cont}
+      {eye}
+      {vc}
 
       <Button
         startIcon={<RefreshIcon style={{ fontSize: '2.2rem' }} />}
@@ -74,6 +64,7 @@ function EvalStats() {
           fontSize: '1.8rem',
           color: '#B0ABAB',
           letterSpacing: '0.0625rem',
+          marginTop: '2rem',
           '&:hover': { backgroundColor: '#272626', color: '#e6e1e1' },
         }}
       >
