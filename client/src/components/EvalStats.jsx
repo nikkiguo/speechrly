@@ -51,11 +51,14 @@ function EvalStats() {
 
   evalStats();
   return (
-    <Stack direction='column' justifyContent='space-between'>
+    <Stack
+      direction='column'
+      justifyContent='space-between'
+      alignItems='center'
+    >
       {cont}
       {eye}
       {vc}
-
       <Button
         startIcon={<RefreshIcon style={{ fontSize: '2.2rem' }} />}
         sx={{
@@ -65,6 +68,7 @@ function EvalStats() {
           color: '#B0ABAB',
           letterSpacing: '0.0625rem',
           marginTop: '2rem',
+          padding: '1rem 2rem',
           '&:hover': { backgroundColor: '#272626', color: '#e6e1e1' },
         }}
       >
