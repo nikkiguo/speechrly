@@ -132,7 +132,7 @@ function RecordingBox({ setIsRecording }) {
                   display: 'flex',
                   flexDirection: 'column',
                   overflow: 'hidden',
-                  overflowY: 'scroll',
+                  overflowY: 'auto',
                 }}
               >
                 <Typography color='#B5B5B5'>{text}</Typography>
